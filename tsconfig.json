@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -11,12 +15,26 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "preserve", // jsx변환 방법
+    "allowSyntheticDefaultImports": true, // 일부 라이브러리에는 export default를 사용하지 않음.
+    // "moduleResolution": "node", // node.js 모듈 해석 규칙을 따른다. = node_modules에서 모듈을 찾는다. classic도 있는데 현재 위치에서 파일을 찾는다.
+    "jsxImportSource": "@emotion/react",
+    "types": [
+      "@emotion/react/types/css-prop"
+    ], // css prop을 사용하기 위해 추가
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

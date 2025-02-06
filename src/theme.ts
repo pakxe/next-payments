@@ -5,7 +5,7 @@ import {css, keyframes} from '@emotion/react';
 const colors = {
   alert: '#FF3D3D',
   gray5: '#000000',
-  gray4: '#383839',
+  gray4: '#333333',
   gray3: '#8B95A1',
   gray2: '#ACACAC',
   gray1: '#FFFFFF',
@@ -31,6 +31,23 @@ const shimmer = keyframes`
   }
 `;
 
+const statusColor = (status: 'focus' | 'none' | 'error') => {
+  switch (status) {
+    case 'focus':
+      return colors.gray5;
+    case 'error':
+      return colors.alert;
+    case 'none':
+    default:
+      return colors.gray2;
+  }
+};
+
+const borderCSS = (status: 'focus' | 'none' | 'error' = 'none') => css`
+  border: 1px solid ${statusColor(status)};
+  border-radius: 2px;
+`;
+
 const skeletonCSS = css`
   display: inline-block;
   background: linear-gradient(90deg, ${colors.gray4} 25%, ${colors.gray3} 50%, ${colors.gray4} 75%);
@@ -46,6 +63,7 @@ const skeletonCSS = css`
 const theme = {
   colors,
   cardColors,
+  borderCSS,
   skeletonCSS,
 } as const;
 
