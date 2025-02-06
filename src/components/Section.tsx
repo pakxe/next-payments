@@ -1,6 +1,7 @@
 import {WithChildren} from '@/types/with';
 import Text from './Text';
 import {ReactElement} from 'react';
+import {css} from '@emotion/react';
 
 type SectionProps = WithChildren & {
   header: ReactElement<typeof SectionHeader>;
@@ -8,7 +9,15 @@ type SectionProps = WithChildren & {
 
 const Section = ({header, children}: SectionProps) => {
   return (
-    <section>
+    <section
+      css={css`
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        width: 100%;
+      `}
+    >
       {header}
       {children}
     </section>
@@ -22,7 +31,13 @@ type SectionHeaderProps = {
 
 const SectionHeader = ({title, description}: SectionHeaderProps) => {
   return (
-    <header>
+    <header
+      css={css`
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      `}
+    >
       <Text as="h2" type="title">
         {title}
       </Text>
