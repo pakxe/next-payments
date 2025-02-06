@@ -25,6 +25,6 @@ export const TYPOGRAPHY = {
   card: {
     fontSize: '14px',
     fontWeight: '500',
-    letterSpacing: '8%',
+    letterSpacing: '3px',
   },
 } as const;
