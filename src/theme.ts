@@ -50,7 +50,7 @@ const borderCSS = (status: 'focus' | 'none' | 'error' = 'none') => css`
 
 const skeletonCSS = css`
   display: inline-block;
-  background: linear-gradient(90deg, ${colors.gray4} 25%, ${colors.gray3} 50%, ${colors.gray4} 75%);
+  background: linear-gradient(90deg, ${colors.gray2} 25%, ${colors.gray1} 50%, ${colors.gray2} 75%);
   background-size: 200% 100%;
   animation: ${shimmer} 1.5s infinite linear;
   border-radius: 8px;
