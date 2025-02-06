@@ -2,10 +2,11 @@ import {TYPOGRAPHY} from '@/constants/typography';
 import Z_INDEX from '@/constants/zIndex';
 import {WithChildren} from '@/types/with';
 import {css, useTheme} from '@emotion/react';
+import {ComponentProps} from 'react';
 
-type Props = WithChildren & {};
+type Props = WithChildren & ComponentProps<'button'>;
 
-const BottomButton = ({children}: Props) => {
+const BottomButton = ({children, ...attrs}: Props) => {
   const {colors} = useTheme();
 
   return (
@@ -30,6 +31,7 @@ const BottomButton = ({children}: Props) => {
 
         ${TYPOGRAPHY.subTitle}
       `}
+      {...attrs}
     >
       {children}
     </button>
