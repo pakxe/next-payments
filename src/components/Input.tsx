@@ -2,10 +2,10 @@ import {css, useTheme} from '@emotion/react';
 import {ComponentProps} from 'react';
 
 type Props = ComponentProps<'input'> & {
-  status?: ElementStatus;
+  isError?: boolean;
 };
 
-const Input = ({status = 'none', ...attrs}: Props) => {
+const Input = ({isError = false, ...attrs}: Props) => {
   const {borderCSS} = useTheme();
 
   return (
@@ -15,10 +15,10 @@ const Input = ({status = 'none', ...attrs}: Props) => {
 
         width: 100%;
 
-        ${borderCSS(status)};
+        ${borderCSS(isError ? 'error' : 'none')};
 
         &:focus {
-          ${borderCSS('focus')};
+          ${borderCSS(isError ? 'error' : 'focus')};
         }
       `}
       {...attrs}
