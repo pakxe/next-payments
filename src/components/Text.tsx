@@ -11,9 +11,17 @@ type Props<T extends AsType = 'p'> = {
   color?: keyof typeof theme.colors;
   cssProp?: SerializedStyles | SerializedStyles[];
   children: string;
+  textAlign?: 'left' | 'center' | 'right';
 } & ComponentPropsWithoutRef<T>;
 
-const Text = <T extends AsType = 'p'>({type = 'body', color, children, cssProp, ...rest}: Props<T>) => {
+const Text = <T extends AsType = 'p'>({
+  textAlign = 'center',
+  type = 'body',
+  color,
+  children,
+  cssProp,
+  ...rest
+}: Props<T>) => {
   const {colors} = useTheme();
   const Element: React.ElementType = rest.as || 'p';
 
@@ -22,6 +30,8 @@ const Text = <T extends AsType = 'p'>({type = 'body', color, children, cssProp, 
       css={css`
         ${TYPOGRAPHY[type]}
         color: ${color ? colors[color] : colors.gray5};
+
+        text-align: ${textAlign || 'left'};
 
         display: flex;
         ${cssProp}
