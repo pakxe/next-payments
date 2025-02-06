@@ -20,7 +20,13 @@ const CompleteCardRegistration = ({cardNumber, company}: Props) => {
 
   return (
     <>
-      <Image data-skeleton src="/check.png" width={100} height={100} alt="check" />
+      <Image
+        data-skeleton
+        src={`${process.env.NEXT_PUBLIC_BASE_NAME}/check.png`}
+        width={100}
+        height={100}
+        alt="check"
+      />
       <Text data-skeleton as="h1" type="title">
         {cardNumber}로 시작하는
         <br />

@@ -63,9 +63,21 @@ const Card = ({company, name, expiration, cardNumber}: Props) => {
         />
         <div>
           {getCardBrand(cardNumber[0]) === 'visa' ? (
-            <Image src="/visa.png" alt="visa" width={100} height={100} style={{width: 'auto', height: '100%'}} />
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BASE_NAME}/visa.png`}
+              alt="visa"
+              width={100}
+              height={100}
+              style={{width: 'auto', height: '100%'}}
+            />
           ) : getCardBrand(cardNumber[0]) === 'master' ? (
-            <Image src="/master.png" alt="master" width={100} height={100} style={{width: 'auto', height: '100%'}} />
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BASE_NAME}/master.png`}
+              alt="master"
+              width={100}
+              height={100}
+              style={{width: 'auto', height: '100%'}}
+            />
           ) : null}
         </div>
       </div>
