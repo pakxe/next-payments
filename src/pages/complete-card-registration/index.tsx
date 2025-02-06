@@ -16,13 +16,15 @@ type Props = {
 };
 
 const CompleteCardRegistration = ({cardNumber, company}: Props) => {
+  const companyName = CARD_COMPANIES.find(({value}) => value === company)?.name || '알 수 없음';
+
   return (
     <>
       <Image data-skeleton src="/check.png" width={100} height={100} alt="check" />
       <Text data-skeleton as="h1" type="title">
         {cardNumber}로 시작하는
         <br />
-        {CARD_COMPANIES.find(({value}) => value === company)?.name}가 등록되었어요.
+        {companyName}가 등록되었어요.
       </Text>
       <Button data-skeleton fullWidth>
         확인

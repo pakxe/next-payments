@@ -1,5 +1,5 @@
 import {css, SerializedStyles, useTheme} from '@emotion/react';
-import {ComponentPropsWithoutRef} from 'react';
+import {ComponentPropsWithoutRef, ReactElement} from 'react';
 import {TYPOGRAPHY} from '../constants/typography';
 import theme from '../theme';
 
@@ -10,7 +10,7 @@ type Props<T extends AsType = 'p'> = {
   type?: keyof typeof TYPOGRAPHY;
   color?: keyof typeof theme.colors;
   cssProp?: SerializedStyles | SerializedStyles[];
-  children: string;
+  children: string | (string | ReactElement<'br'>)[];
   textAlign?: 'left' | 'center' | 'right';
 } & ComponentPropsWithoutRef<T>;
 

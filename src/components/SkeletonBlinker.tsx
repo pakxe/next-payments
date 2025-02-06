@@ -2,7 +2,7 @@ import {SerializedStyles, useTheme} from '@emotion/react';
 import {Children, cloneElement, isValidElement, memo, ReactElement, ReactNode} from 'react';
 import Skeleton from './Skeleton';
 
-const getCSS = props => {
+const getCSS = (props: any) => {
   return props.cssProp ? props.cssProp : props.css ? props.css : {};
 };
 
@@ -12,12 +12,17 @@ const SkeletonUI = ({cssProp}: {cssProp?: SerializedStyles}) => {
   return <span css={[skeletonCSS, cssProp]} />;
 };
 
-const executeAndTransform = (Component: any, props: any, isLoading: boolean): ReactNode => {
+const executeAndTransform = (Component: any, props: any, isLoading: boolean) => {
   const jsx = Component({...props, isLoading});
   return jsx;
 };
 
-const transformSkeleton = (node: ReactElement | ReactElement[], isLoading: boolean): ReactNode => {
+const transformSkeleton = (
+  node: ReactElement<{children: ReactNode}> | ReactElement<{children: ReactNode}>[],
+  isLoading: boolean,
+): ReactNode => {
+  if (!node) return;
+
   if (Array.isArray(node)) {
     return node.map(child => transformSkeleton(child, isLoading));
   }
@@ -26,11 +31,12 @@ const transformSkeleton = (node: ReactElement | ReactElement[], isLoading: boole
     return node; // 문자열, 숫자 등 기본 노드는 그대로 반환
   }
 
-  const {type, props} = node;
+  const {type, props} = node as ReactElement<any>;
 
   // 1️⃣ `data-skeleton`이 있는 요소라면 무조건 스켈레톤 UI로 변경
   if (props['data-skeleton']) {
-    if (type.name === 'Text' && isLoading) return <Skeleton.Text type={props.type} cssProp={props.cssProp} />;
+    if (typeof type !== 'string' && type.name === 'Text' && isLoading)
+      return <Skeleton.Text type={props.type} cssProp={props.cssProp} />;
     if ('alt' in props && isLoading) return <Skeleton.Image {...props} />;
 
     return isLoading ? <SkeletonUI cssProp={getCSS(props)} /> : node;
@@ -55,10 +61,16 @@ const transformSkeleton = (node: ReactElement | ReactElement[], isLoading: boole
   });
 };
 
-const SkeletonBlinker = memo(({children, isLoading}: {children: ReactNode; isLoading: boolean}) => {
+const SkeletonBlinker = ({
+  children,
+  isLoading,
+}: {
+  children: ReactElement<{children: ReactNode}>;
+  isLoading: boolean;
+}) => {
   const transformedChildren = transformSkeleton(children, isLoading);
 
   return <>{transformedChildren}</>;
-});
+};
 
 export default SkeletonBlinker;

@@ -73,7 +73,7 @@ const Card = ({company, name, expiration, cardNumber}: Props) => {
         {cardNumber.join(' ')}
       </Text>
       <Text color="gray1" type="card">
-        {(expiration.month !== '' || expiration.year !== '') && `${expiration.month} / ${expiration.year}`}
+        {expiration.month !== '' || expiration.year !== '' ? `${expiration.month} / ${expiration.year}` : ''}
       </Text>
       <Text color="gray1" type="card">
         {name.toUpperCase()}
