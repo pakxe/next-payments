@@ -2,6 +2,7 @@ import makeChildrenArray from '@/utils/makeChildrenArray';
 import {css, useTheme} from '@emotion/react';
 import {cloneElement, ComponentProps, ReactElement, useState} from 'react';
 import Text from './Text';
+import Z_INDEX from '@/constants/zIndex';
 
 type Value = string | number;
 
@@ -37,7 +38,7 @@ const Dropdown = ({children, onChange, defaultValue, placeHolder}: DropdownProps
     }
   };
 
-  const handleButtonClick = () => {
+  const handleToggle = () => {
     setIsOpen(prev => !prev);
   };
 
@@ -45,10 +46,12 @@ const Dropdown = ({children, onChange, defaultValue, placeHolder}: DropdownProps
     <div
       css={css`
         position: relative;
+
+        width: 100%;
       `}
     >
       <button
-        onClick={handleButtonClick}
+        onClick={handleToggle}
         css={css`
           width: 100%;
 
@@ -62,6 +65,7 @@ const Dropdown = ({children, onChange, defaultValue, placeHolder}: DropdownProps
         {selectedName === '' && placeHolder ? placeHolder : selectedName}
       </button>
       <Text
+        onClick={handleToggle}
         cssProp={css`
           position: absolute;
           right: 8px;
@@ -89,6 +93,9 @@ const Dropdown = ({children, onChange, defaultValue, placeHolder}: DropdownProps
             display: flex;
             flex-direction: column;
             gap: 16px;
+
+            z-index: ${Z_INDEX.DROPDOWN};
+
             ${borderCSS()};
           `}
         >
